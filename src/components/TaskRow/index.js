@@ -1,37 +1,44 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { useMutation, useQueryClient } from "react-query";
+/* eslint-disable react/require-default-props */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useMutation, useQueryClient } from 'react-query';
 
 // components
-import Button from "../Button";
-import TagDropdown from "../TagDropdown";
+import Button from '../Button';
+import TagDropdown from '../TagDropdown';
 
 // queries
-import { UPDATE_TASK } from "../../queries/tasks";
+import { UPDATE_TASK } from '../../queries/tasks';
 
 // utils
-import { mutationService } from "../../utils/apiService";
+import { mutationService } from '../../utils/apiService';
 
-const TaskRow = ({ id, title, tags, start_time, end_time, onDelete }) => {
+const TaskRow = ({
+  id, title, start_time, end_time, onDelete,
+}) => {
   const [taskTitle, setTaskTitle] = useState(title);
   const queryClient = useQueryClient();
   const isStarted = !!start_time;
-  const isEnded = !!end_time
+  const isEnded = !!end_time;
 
   const mutation = useMutation(
     async (body) => mutationService(UPDATE_TASK, body),
-      {
-      onMutate: data => {
+    {
+      onMutate: (data) => {
         queryClient.cancelQueries('tasks');
       },
       onSuccess: async (data, variables, context) => {
-        queryClient.refetchQueries("tasks");
+        queryClient.refetchQueries('tasks');
       },
       onError: (error, variables, context) => {
-        console.log("error >>", error);
+        console.log('error >>', error);
       },
       onSettled: (data, error, variables, context) => {},
-    }
+    },
   );
 
   const handleTitleUpdate = (event) => {
@@ -39,7 +46,7 @@ const TaskRow = ({ id, title, tags, start_time, end_time, onDelete }) => {
     // Todo : debounce
     mutation.mutate({
       id: {
-        id: id,
+        id,
       },
       body: {
         title: event.target.value,
@@ -50,7 +57,7 @@ const TaskRow = ({ id, title, tags, start_time, end_time, onDelete }) => {
   const handleStart = (event) => {
     mutation.mutate({
       id: {
-        id: id,
+        id,
       },
       body: {
         start_time: new Date().toISOString(),
@@ -61,7 +68,7 @@ const TaskRow = ({ id, title, tags, start_time, end_time, onDelete }) => {
   const handleStop = (event) => {
     mutation.mutate({
       id: {
-        id: id,
+        id,
       },
       body: {
         end_time: new Date().toISOString(),
@@ -100,6 +107,5 @@ const TaskRow = ({ id, title, tags, start_time, end_time, onDelete }) => {
 TaskRow.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
-  tags: PropTypes.array,
 };
 export default TaskRow;

@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
 export const CREATE_TASK = gql`
   mutation CreateTask($body: tasks_insert_input!) {

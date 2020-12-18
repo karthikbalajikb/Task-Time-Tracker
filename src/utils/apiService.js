@@ -1,7 +1,7 @@
-import { GraphQLClient } from "graphql-request";
+import { GraphQLClient } from 'graphql-request';
 
 // utils
-import { getToken } from "./index";
+import { getToken } from './index';
 
 const endpoint = process.env.REACT_APP_BACKEND_BASE_URL;
 

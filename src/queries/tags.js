@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
 export const CREATE_TAG = gql`
   mutation CreateTag($body: tags_insert_input!) {
