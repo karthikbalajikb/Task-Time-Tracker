@@ -35,7 +35,7 @@ const TimeTracking = () => {
     status, data, error, isFetching,
   } = useTasks();
   return (
-    <div className="ml-16">
+    <div className="ml-16 mt-10">
       <Toolbar />
       <CreateTask />
       <h1 className="ml-16">Tasks</h1>
@@ -58,6 +58,7 @@ const TimeTracking = () => {
                 />
               ))}
             </div>
+            {data.tasks?.length === 0 && <div>No Task. Please go and create some</div>}
             <div>{isFetching ? 'Background Updating...' : ' '}</div>
           </>
         )}

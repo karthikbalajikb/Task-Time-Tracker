@@ -29,24 +29,24 @@ const CreateTask = () => {
     },
   );
 
-  if (!showForm) {
-    return (
-      <Button
-        label="+ New Task"
-        size="medium"
-        className="bg-primary ml-2 px-2"
-        onClick={() => setShowForm(true)}
-      />
-    );
-  }
-
   const handleSave = (event) => {
     event.preventDefault();
     mutation.mutate({ body: { title } });
   };
 
+  if (!showForm) {
+    return (
+      <Button
+        label="+ New Task"
+        size="medium"
+        className="bg-primary ml-2 px-2 my-8"
+        onClick={() => setShowForm(true)}
+      />
+    );
+  }
+
   return (
-    <div className="flex items-center justify-between h-12 px-4 py-2 mr-8 bg-white border border-gray-300 rounded-lg">
+    <div className="flex items-center justify-between h-12 px-4 py-2 mr-8 my-8 bg-white border border-gray-300 rounded-lg">
       <div className="flex flex-1 items-center">
         {/* Title */}
         <div className="inline-flex flex-1 items-center mr-3">
